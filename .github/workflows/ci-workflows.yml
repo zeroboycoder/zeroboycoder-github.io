@@ -27,3 +27,5 @@ jobs:
         with:
           folder: build
           branch: gh-pages
+        env:
+          GITHUB_TOKEN: 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

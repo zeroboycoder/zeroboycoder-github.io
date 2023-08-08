@@ -1,0 +1,29 @@
+name: CI/CD with React app
+# Trigger workflow on push
+# but only the main master branch
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-and-deploy:
+    runs-on: macos
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "18.16.1"
+
+      - name: Install npm
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy
+        uses: crazy-max/ghaction-github-pages@v1
+        with:
+          folder: build
+          branch: gh-pages
